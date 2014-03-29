@@ -53,6 +53,8 @@ function love.load()
 	goose_audio = love.audio.newSource("audio/Geese Honking.ogg")
 	goose_audio:setLooping(true)
 	goose_audio:play()
+	title_audio = love.audio.newSource("audio/Title.wav")
+	title_audio:play()
 end
 
 current_scene = {}

@@ -70,5 +70,10 @@ scenes.title = {
 		
 		love.graphics.setColor(0, 0, 0, self.darkening)
 		love.graphics.rectangle("fill", 0, 0, width, height)
+		
+		if (elapsed > 3.2 and elapsed < 3.5) or (elapsed > 3.8 and elapsed < 3.9) or (elapsed > 4.0 and elapsed < 4.1) then
+			love.graphics.setColor(255, 255, 255)
+			love.graphics.rectangle("fill", 0, 0, width, height)
+		end
 	end,
 }
