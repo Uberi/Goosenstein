@@ -20,7 +20,7 @@ function init_character(collider, x, y)
 	local character = {
 		x = x, y = y,
 		w = 80, h = 100,
-		image = love.graphics.newImage("images/main_character.png"),
+		image = love.graphics.newImage("images/Character.png"),
 		scale = 0.4,
 		velocity_x = 0, velocity_y = 0,
 		mtv_x = nil, mtv_y = nil,
