@@ -41,13 +41,15 @@ function love.load()
 
 	scene_changed = false
 
-	--set_scene(scenes.title) --wip: debug
+	set_scene(scenes.title) --wip: debug
 	--set_scene(scenes.intro)
 	--set_scene(scenes.bus)
 	--set_scene(scenes.part)
 	--set_scene(scenes.big)
 	--set_scene(scenes.tunnel)
-	set_scene(scenes.hill)
+	--set_scene(scenes.hill)
+	
+	level1_audio = love.audio.newSource("audio/Level1.wav")
 end
 
 current_scene = {}

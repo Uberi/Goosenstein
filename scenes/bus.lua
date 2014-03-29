@@ -37,6 +37,7 @@ scenes.bus = {
 		self.goose_collider = HC(100, function(dt, shape_s, shape_t, dx, dy)
 			if total_elapsed > 2 and not bus_scene_initiate then --small period of invulnerability
 				set_scene(scenes.game_over)
+				level1_audio:stop()
 				return
 			end
 		end)
@@ -91,6 +92,7 @@ scenes.bus = {
 		end
 		if self.character.y > 6000 then
 			set_scene(scenes.game_over)
+			level1_audio:stop()
 			return
 		end
 		
@@ -109,7 +111,7 @@ scenes.bus = {
 			self.camera_x = self.camera_x * (1 - movement) + (self.bus_x - width / 2) * movement
 			self.camera_y = self.camera_y * (1 - movement) + (self.bus_y - height / 2) * movement
 			self.bus_x = self.bus_x + 300 * dt
-			if self.bus_x > 2600 then
+			if self.bus_x > 2600 and not level1_audio:isPlaying() then
 				set_scene(scenes.part)
 				return
 			end
@@ -162,7 +164,7 @@ scenes.bus = {
 				goose.x = self.character.x + 1500
 				goose.target_x, goose.target_y = self.character.x, self.character.y
 			end
-			goose.y = -0.001 * (goose.x - goose.target_x)^2 + goose.target_y
+			goose.y = -0.001 * (goose.x - goose.target_x)^2 + goose.target_y + 50
 		end
 		
 		--fade in rectangle alpha

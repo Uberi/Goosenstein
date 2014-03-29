@@ -33,6 +33,7 @@ scenes.intro = {
 		self.goose_collider = HC(100, function(dt, shape_s, shape_t, dx, dy)
 			if total_elapsed > 2 then --small period of invulnerability
 				set_scene(scenes.game_over)
+				level1_audio:stop()
 				return
 			end
 		end)
@@ -51,6 +52,8 @@ scenes.intro = {
 			table.insert(self.map[math.floor((i - 1) / tilemap.width) + 1], value)
 		end
 		self.tiles, self.tile_quads = init_map(self.map, self.collider, self.tile_size)
+		
+		level1_audio:play()
 	end,
 	mousereleased = function(self, x, y, button)
 		self.pause_play_button:mousereleased(x, y, button)
@@ -134,7 +137,7 @@ scenes.intro = {
 				goose.x = self.character.x + 1500
 				goose.target_x, goose.target_y = self.character.x, self.character.y
 			end
-			goose.y = -0.001 * (goose.x - goose.target_x)^2 + goose.target_y
+			goose.y = -0.001 * (goose.x - goose.target_x)^2 + goose.target_y + 50
 		end
 		
 		--fade in rectangle alpha
@@ -151,6 +154,7 @@ scenes.intro = {
 			return
 		end
 		if self.character.y > 6000 then
+			level1_audio:stop()
 			set_scene(scenes.game_over)
 			return
 		end

@@ -134,7 +134,7 @@ scenes.part = {
 				goose.x = self.character.x + 2500
 				goose.target_x, goose.target_y = self.character.x, self.character.y
 			end
-			goose.y = -0.001 * (goose.x - goose.target_x)^2 + goose.target_y
+			goose.y = -0.001 * (goose.x - goose.target_x)^2 + goose.target_y + 50
 		end
 
 		--fade in rectangle alpha
