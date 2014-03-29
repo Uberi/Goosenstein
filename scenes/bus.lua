@@ -18,7 +18,8 @@ scenes.bus = {
 		self.goose_flapping = love.graphics.newImage("images/Goose Flapping.png")
 		self.goosoraptor = love.graphics.newImage("images/Goosoraptor.png")
 		self.bus = love.graphics.newImage("images/Bus.png")
-
+		self.bus_x, self.bus_y = 1750, 690
+		
 		self.pause_play_button = button:create("ii", 10, 10, 40, 40, self.pixel_small)
 		
 		self.rain = init_rain()
@@ -65,11 +66,11 @@ scenes.bus = {
 		
 		local move_speed = 300
 		local actuated = false
-		local bus_scene_initiate = false; --if true then player can not move, if false then player can move!
+		local bus_scene_initiate = false;
 		
-		--if self.character.x >= 1700 then
-		--	bus_scene_initiate = true
-		--end
+		if self.character.x >= 1700 then
+			bus_scene_initiate = true
+		end
 		
 		if  not bus_scene_initiate then
 			if love.keyboard.isDown("a") or love.keyboard.isDown("left") then
@@ -83,11 +84,13 @@ scenes.bus = {
 				self.character.x = self.character.x + move_speed * dt
 				self.character.flipped = false
 				actuated = true
-				print("CHARACTER X: ", self.character.x)
-				print("CHARACTER Y: ", self.character.y)
+				--print("CHARACTER X: ", self.character.x)
+				--print("CHARACTER Y: ", self.character.y)
 			end
 		else
-			--nothing shall go here!!
+			self.camera_x = self.camera_x * (1 - movement) + (self.bus_x - width / 2) * movement
+			self.camera_y = self.camera_y * (1 - movement) + (self.bus_y - height / 2) * movement
+			self.bus_x = self.bus_x + 300*dt
 		end
 		
 		if actuated then
@@ -159,6 +162,13 @@ scenes.bus = {
 			draw_character(goose, self.camera_x, self.camera_y)
 		end
 		love.graphics.draw(self.rain, 0, 0)
+		
+		--bus draw
+		love.graphics.push()
+		love.graphics.translate(-self.camera_x, -self.camera_y)
+		love.graphics.draw(self.bus, self.bus_x, self.bus_y)
+		love.graphics.pop()
+		
 		draw_map(self.map, self.tiles, self.tile_quads, self.tile_size, self.camera_x, self.camera_y)
 		self.pause_play_button:draw()
 		
