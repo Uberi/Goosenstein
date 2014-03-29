@@ -10,6 +10,7 @@ require "scenes/part"
 require "scenes/big"
 require "scenes/tunnel"
 require "scenes/hill"
+require "scenes/game_over"
 
 --give local aliases for globals to improve performance
 local love, math = love, math
@@ -23,7 +24,7 @@ Scenes are often stored in their own files, with the same general format:
 
     scenes.some_scene = {
 		initialize = function(self) print("This is called at the start of the game.") end,
-		enter = function(self) print("This is called when the scene starts") end,
+		enter = function(self, old_scene) print("This is called when the scene starts") end,
 		exit = function(self) print("This is called when the scene ends") end,
 		update = function(self, dt, elapsed) print("This is called on every frame to perform game logic") end,
 		draw = function(self, dt, elapsed) print("This is called on every frame to perform drawing") end,
@@ -57,9 +58,10 @@ function set_scene(scene)
 	if current_scene.exit then
 		current_scene:exit()
 	end
+	local old_scene = current_scene
 	current_scene = scene
 	if current_scene.enter then
-		scene:enter()
+		scene:enter(old_scene)
 	end
 	current_start_time = love.timer.getTime()
 	scene_changed = true

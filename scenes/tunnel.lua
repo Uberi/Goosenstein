@@ -20,9 +20,10 @@ scenes.tunnel = {
 		self.goose_flapping = love.graphics.newImage("images/Goose Flapping.png")
 		self.goosoraptor = love.graphics.newImage("images/Goosoraptor.png")
 
-		self.pause_play_button = button:create("ii", 10, 10, 40, 40, self.pixel_small)
-		
 		self.rain = init_rain()
+	end,
+	enter = function(self)
+		self.pause_play_button = button:create("ii", 10, 10, 40, 40, self.pixel_small)
 		
 		self.camera_x, self.camera_y = 0, 0
 		
@@ -135,7 +136,7 @@ scenes.tunnel = {
 			end
 			goose.y = -0.001 * (goose.x - goose.target_x)^2 + goose.target_y
 		end
-		love.window.setTitle(self.character.x)
+
 		--fade in rectangle alpha
 		if elapsed <= 0.5 then
 			self.darkening = 255

@@ -3,24 +3,19 @@ scenes = scenes or {}
 require "utilities/buttons"
 
 scenes.game_over = {
-  initialize = function(self)
-   self.pixel_large = love.graphics.newFont("fonts/Victor Pixel.ttf", 86)
-   self.pixel_medium = love.graphics.newFont("fonts/Victor Pixel.ttf", 56)
-   self.pixel_small = love.graphics.newFont("fonts/Victor Pixel.ttf", 30)
-   love.graphics.setFont(self.pixel_medium)
+    initialize = function(self)
+		self.pixel_large = love.graphics.newFont("fonts/Victor Pixel.ttf", 86)
+		self.pixel_medium = love.graphics.newFont("fonts/Victor Pixel.ttf", 56)
+		self.pixel_small = love.graphics.newFont("fonts/Victor Pixel.ttf", 30)
+		love.graphics.setFont(self.pixel_medium)
+	end,
    
-   self.restart_button = button:create("restart", 130, 400, 400, 90, self.pixel_large)
-   self.exit_button = button:create("exit", 600, 400, 400, 90, self.pixel_large)
-     
-   self.buttons_enabled = true
-   end,
-   
-   enter = function(self)
-     self.restart_button = button:create("restart", 130, 400, 400, 90, self.pixel_large)
-     self.exit_button = button:create("exit", 600, 400, 400, 90, self.pixel_large)
-     
-     self.buttons_enabled = true
-   end,
+	enter = function(self, old_scene)
+		self.old_scene = old_scene
+		self.restart_button = button:create("restart", 130, 400, 400, 90, self.pixel_large)
+		self.exit_button = button:create("exit", 600, 400, 400, 90, self.pixel_large)
+		self.buttons_enabled = true
+	end,
    
    mousereleased = function(self, x, y, button)
     self.restart_button:mousereleased(x, y, button)
@@ -33,13 +28,13 @@ scenes.game_over = {
       self.exit_button:update(dt)
       if self.restart_button.was_clicked then
         self.buttons_enabled = false
-        set_scene(scenes.intro)
+        set_scene(self.old_scene)
         return
       end
       
       if self.exit_button.was_clicked then
         self.buttons_enabled = false
-        set_scene(scenes.intro)
+        set_scene(scenes.title)
         return
       end
     end

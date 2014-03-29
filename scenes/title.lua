@@ -8,7 +8,8 @@ scenes.title = {
 		self.pixel_medium = love.graphics.newFont("fonts/Victor Pixel.ttf", 56)
 		self.pixel_small = love.graphics.newFont("fonts/Victor Pixel.ttf", 30)
 		self.logo = love.graphics.newImage("images/Goosenstein.png")
-
+	end,
+	enter = function(self)
 		self.resume_button = button:create("resume", 130, 400, 400, 90, self.pixel_large)
 		self.start_button = button:create("start", 570, 400, 250, 60, self.pixel_medium)
 		self.levels_button = button:create("levels", 870, 400, 260, 60, self.pixel_medium)

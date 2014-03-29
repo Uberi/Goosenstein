@@ -21,6 +21,8 @@ scenes.bus = {
 		self.goose_flapping = love.graphics.newImage("images/Goose Flapping.png")
 		self.goosoraptor = love.graphics.newImage("images/Goosoraptor.png")
 		self.bus = love.graphics.newImage("images/Bus.png")
+	end,
+	enter = function(self)
 		self.bus_x, self.bus_y = 1750, 660
 		
 		self.pause_play_button = button:create("ii", 10, 10, 40, 40, self.pixel_small)
