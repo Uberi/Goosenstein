@@ -34,7 +34,8 @@ scenes.bus = {
 		
 		self.goose_collider = HC(100, function(dt, shape_s, shape_t, dx, dy)
 			if total_elapsed > 2 and not bus_scene_initiate then --small period of invulnerability
-				love.event.quit() --wip: game over screen
+				set_scene(scenes.game_over)
+				return
 			end
 		end)
 		self.geese = {init_goose(self.collider, 700, 0, "images/Goose Flying.png"), init_goose(self.collider, 0, 0, "images/Goose Flapping.png")}
@@ -86,6 +87,10 @@ scenes.bus = {
 		if self.character.x >= 1700 then
 			bus_scene_initiate = true
 		end
+		if self.character.y > 6000 then
+			set_scene(scenes.game_over)
+			return
+		end
 		
 		if  not bus_scene_initiate then
 			if love.keyboard.isDown("a") or love.keyboard.isDown("left") then
@@ -103,7 +108,7 @@ scenes.bus = {
 			self.camera_y = self.camera_y * (1 - movement) + (self.bus_y - height / 2) * movement
 			self.bus_x = self.bus_x + 300 * dt
 			if self.bus_x > 2600 then
-				love.event.quit()
+				set_scene(scenes.part)
 				return
 			end
 		end

@@ -31,7 +31,8 @@ scenes.intro = {
 		
 		self.goose_collider = HC(100, function(dt, shape_s, shape_t, dx, dy)
 			if total_elapsed > 2 then --small period of invulnerability
-				love.event.quit() --wip: game over screen
+				set_scene(scenes.game_over)
+				return
 			end
 		end)
 		self.geese = {init_goose(self.collider, 700, 0, "images/Goose Flying.png"), init_goose(self.collider, 0, 0, "images/Goose Flapping.png")}
@@ -146,6 +147,10 @@ scenes.intro = {
 		
 		if self.character.x > 2400 then --end condition reached
 			set_scene(scenes.bus)
+			return
+		end
+		if self.character.y > 6000 then
+			set_scene(scenes.game_over)
 			return
 		end
 	end,
