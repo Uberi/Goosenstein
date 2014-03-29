@@ -17,6 +17,7 @@ scenes.bus = {
 		self.goose_flying = love.graphics.newImage("images/Goose Flying.png")
 		self.goose_flapping = love.graphics.newImage("images/Goose Flapping.png")
 		self.goosoraptor = love.graphics.newImage("images/Goosoraptor.png")
+		self.bus = love.graphics.newImage("images/Bus.png")
 
 		self.pause_play_button = button:create("ii", 10, 10, 40, 40, self.pixel_small)
 		
@@ -64,16 +65,31 @@ scenes.bus = {
 		
 		local move_speed = 300
 		local actuated = false
-		if love.keyboard.isDown("a") or love.keyboard.isDown("left") then
-			self.character.x = self.character.x - move_speed * dt
-			self.character.flipped = true
-			actuated = true
+		local bus_scene_initiate = false; --if true then player can not move, if false then player can move!
+		
+		if self.character.x >= 1700 and self.character.x <= 1725 and self.character.y == 750 then
+			bus_scene_initiate = true
 		end
-		if love.keyboard.isDown("d") or love.keyboard.isDown("right") then
-			self.character.x = self.character.x + move_speed * dt
-			self.character.flipped = false
-			actuated = true
+		
+		if  not bus_scene_initiate then
+			if love.keyboard.isDown("a") or love.keyboard.isDown("left") then
+				self.character.x = self.character.x - move_speed * dt
+				self.character.flipped = true
+				actuated = true
+				--print("CHARACTER X: ", self.character.x)
+				--print("CHARACTER Y: ", self.character.y)
+			end
+			if love.keyboard.isDown("d") or love.keyboard.isDown("right") then
+				self.character.x = self.character.x + move_speed * dt
+				self.character.flipped = false
+				actuated = true
+				--print("CHARACTER X: ", self.character.x)
+				--print("CHARACTER Y: ", self.character.y)
+			end
+		else
+			--nothing shall go here!!
 		end
+		
 		if actuated then
 			self.character.state = self.character.quads[(math.floor(elapsed / 0.1) % 4) + 5]
 		else
@@ -97,8 +113,12 @@ scenes.bus = {
 			self.character.y = self.character.y + self.character.mtv_y
 			if self.character.mtv_y < self.character.mtv_x then --colliding on top or bottom
 				self.character.velocity_y = 0
-				if love.keyboard.isDown("w") or love.keyboard.isDown("up") then
-					self.character.velocity_y = -600
+				if not bus_scene_initiate then
+					if love.keyboard.isDown("w") or love.keyboard.isDown("up") then
+						self.character.velocity_y = -600
+					end
+				else
+					--nothing will happen here because yeah
 				end
 			else
 				self.character.velocity_x = 0
