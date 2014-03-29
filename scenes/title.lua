@@ -1,5 +1,7 @@
 scenes = scenes or {}
 
+require "utilities/buttons"
+
 scenes.title = {
 	initialize = function(self)
 		self.pixel_large = love.graphics.newFont("fonts/Victor Pixel.ttf", 86)

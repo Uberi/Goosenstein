@@ -3,9 +3,6 @@ images = {}
 fonts = {}
 scenes = {}
 
-require "utilities/bloom"
-require "utilities/buttons"
-
 require "scenes/title"
 require "scenes/intro"
 
@@ -36,8 +33,8 @@ function love.load()
 		scene:initialize()
 	end
 
-	set_scene(scenes.title) --wip: debug
-	--set_scene(scenes.intro)
+	--set_scene(scenes.title) --wip: debug
+	set_scene(scenes.intro)
 end
 
 current_scene = {}
