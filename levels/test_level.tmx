@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="100" height="20" tilewidth="32" tileheight="32">
+ <tileset firstgid="1" name="grass-tiles-2-small" tilewidth="32" tileheight="32">
+  <tileoffset x="-2" y="0"/>
+  <image source="../../../../Desktop/testing/tileset/tileset/grass-tiles-2-small.png" trans="4b4b4b" width="384" height="192"/>
+ </tileset>
+ <tileset firstgid="73" name="stone-1" tilewidth="32" tileheight="32">
+  <tileoffset x="-2" y="0"/>
+  <image source="../../../../Desktop/testing/tileset/stone0008.jpg" trans="4b4b4b" width="512" height="512"/>
+ </tileset>
+ <tileset firstgid="329" name="420__pixel_art__icons_for_rpg_by_7soul1-d25c1np" tilewidth="32" tileheight="32">
+  <tileoffset x="-2" y="0"/>
+  <image source="../../../../Desktop/testing/tileset/420__pixel_art__icons_for_rpg_by_7soul1-d25c1np.png" trans="4b4b4b" width="476" height="1020"/>
+ </tileset>
+ <tileset firstgid="763" name="grounds-1" tilewidth="32" tileheight="32">
+  <tileoffset x="-2" y="0"/>
+  <image source="../../../../Desktop/testing/tileset/dg_grounds32.gif" trans="4b4b4b" width="288" height="608"/>
+ </tileset>
+ <layer name="Tile Layer 1" width="100" height="20">
+  <data encoding="base64" compression="zlib">
+   eJztlEEKgDAMBAuC4P8/7FWkiUnTJQdnYK42zXYdAwAAAAAAwOY8bEGLtfdrIrloiOze0+uMqk9eZ5UdVp1bzSCazfvbmXt9zZ2Zp8LKriJ3UmWQ8TlHdI87+6vMoPpWO1x9YzvPjubQvas/GPlPds+IiIiImPEGzQQrMw==
+  </data>
+ </layer>
+</map>
