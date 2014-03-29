@@ -15,12 +15,13 @@ scenes.game_over = {
    self.buttons_enabled = true
    end,
    
-   enter = function(self)
-     self.restart_button = button:create("restart", 130, 400, 400, 90, self.pixel_large)
-     self.exit_button = button:create("exit", 600, 400, 400, 90, self.pixel_large)
+	enter = function(self, old_scene)   
+		self.restart_button = button:create("restart", 130, 400, 400, 90, self.pixel_large)
+		self.exit_button = button:create("exit", 600, 400, 400, 90, self.pixel_large)
      
-     self.buttons_enabled = true
-   end,
+		self.old_scene = old_scene 
+		self.buttons_enabled = true
+	end,
    
    mousereleased = function(self, x, y, button)
     self.restart_button:mousereleased(x, y, button)
@@ -33,7 +34,7 @@ scenes.game_over = {
       self.exit_button:update(dt)
       if self.restart_button.was_clicked then
         self.buttons_enabled = false
-        set_scene(scenes.intro)
+        set_scene(self.old_scene)
         return
       end
       

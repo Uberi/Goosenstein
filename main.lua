@@ -50,6 +50,9 @@ function love.load()
 	--set_scene(scenes.hill)
 	
 	level1_audio = love.audio.newSource("audio/Level1.wav")
+	goose_audio = love.audio.newSource("audio/Geese Honking.ogg")
+	goose_audio:setLooping(true)
+	goose_audio:play()
 end
 
 current_scene = {}
@@ -61,7 +64,7 @@ function set_scene(scene)
 		current_scene:exit()
 	end
 	local old_scene = current_scene
-	current_scene = scene
+	current_scene = scene 
 	if current_scene.enter then
 		scene:enter(old_scene)
 	end
