@@ -3,7 +3,7 @@ scenes = scenes or {}
 require "utilities/bloom"
 require "utilities/buttons"
 local HC = require "hardoncollider"
-local tilemap = require "levels/level1_part2"
+local tilemap = require "levels/level1_house"
 require "levels"
 
 scenes.intro = {
@@ -25,7 +25,7 @@ scenes.intro = {
 		self.camera_x, self.camera_y = 0, 0
 		
 		self.collider = HC(100)
-		self.character = init_character(self.collider, 500, 250)
+		self.character = init_character(self.collider, 151, 250)
 		self.geese = {init_goose(self.collider, 700, 0, "images/Goose Flying.png"), init_goose(self.collider, 0, 0, "images/Goose Flapping.png")}
 		
 		self.tile_size = 50
@@ -125,7 +125,7 @@ scenes.intro = {
 			self.darkening = 0
 		end
 		
-		if self.character.x > 9900 then --end condition reached
+		if self.character.x > 2400 then --end condition reached
 			set_scene(scenes.bus)
 			return
 		end
