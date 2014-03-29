@@ -3,11 +3,10 @@ scenes = scenes or {}
 require "utilities/bloom"
 require "utilities/buttons"
 local HC = require "hardoncollider"
-local tilemap = require "levels/level1_house"
+local tilemap = require "levels/level1_part1"
 require "levels"
-local snapshot
 
-scenes.intro = {
+scenes.bus = {
 	initialize = function(self)
 		self.bloom_effect = bloom:create()
 		self.bloom_effect.radius = 4
@@ -18,7 +17,9 @@ scenes.intro = {
 		self.goose_flying = love.graphics.newImage("images/Goose Flying.png")
 		self.goose_flapping = love.graphics.newImage("images/Goose Flapping.png")
 		self.goosoraptor = love.graphics.newImage("images/Goosoraptor.png")
-
+		self.bus = love.graphics.newImage("images/Bus.png")
+		self.bus_x, self.bus_y = 1750, 690
+		
 		self.pause_play_button = button:create("ii", 10, 10, 40, 40, self.pixel_small)
 		
 		self.rain = init_rain()
@@ -26,9 +27,8 @@ scenes.intro = {
 		self.camera_x, self.camera_y = 0, 0
 		
 		self.collider = HC(100)
-		self.character = init_character(self.collider, 151, 250)
+		self.character = init_character(self.collider, 500, 250)
 		self.geese = {init_goose(self.collider, 700, 0, "images/Goose Flying.png"), init_goose(self.collider, 0, 0, "images/Goose Flapping.png")}
-    snapshot = {x = self.character.x, y = self.character.y}
 		
 		self.tile_size = 50
 		self.map = {}
@@ -53,7 +53,7 @@ scenes.intro = {
 				self.pause_play_button.text = ">"
 			end
 		end
-		
+
 		--update tracking camera
 		local movement = 1.5 * dt
 		self.camera_x = self.camera_x * (1 - movement) + (self.character.x - width / 2) * movement
@@ -66,16 +66,33 @@ scenes.intro = {
 		
 		local move_speed = 300
 		local actuated = false
-		if love.keyboard.isDown("a") or love.keyboard.isDown("left") then
-			self.character.x = self.character.x - move_speed * dt
-			self.character.flipped = true
-			actuated = true
+		local bus_scene_initiate = false;
+		
+		if self.character.x >= 1700 then
+			bus_scene_initiate = true
 		end
-		if love.keyboard.isDown("d") or love.keyboard.isDown("right") then
-			self.character.x = self.character.x + move_speed * dt
-			self.character.flipped = false
-			actuated = true
+		
+		if  not bus_scene_initiate then
+			if love.keyboard.isDown("a") or love.keyboard.isDown("left") then
+				self.character.x = self.character.x - move_speed * dt
+				self.character.flipped = true
+				actuated = true
+				--print("CHARACTER X: ", self.character.x)
+				--print("CHARACTER Y: ", self.character.y)
+			end
+			if love.keyboard.isDown("d") or love.keyboard.isDown("right") then
+				self.character.x = self.character.x + move_speed * dt
+				self.character.flipped = false
+				actuated = true
+				--print("CHARACTER X: ", self.character.x)
+				--print("CHARACTER Y: ", self.character.y)
+			end
+		else
+			self.camera_x = self.camera_x * (1 - movement) + (self.bus_x - width / 2) * movement
+			self.camera_y = self.camera_y * (1 - movement) + (self.bus_y - height / 2) * movement
+			self.bus_x = self.bus_x + 300*dt
 		end
+		
 		if actuated then
 			self.character.state = self.character.quads[(math.floor(elapsed / 0.1) % 4) + 5]
 		else
@@ -99,8 +116,12 @@ scenes.intro = {
 			self.character.y = self.character.y + self.character.mtv_y
 			if self.character.mtv_y < self.character.mtv_x then --colliding on top or bottom
 				self.character.velocity_y = 0
-				if love.keyboard.isDown("w") or love.keyboard.isDown("up") then
-					self.character.velocity_y = -600
+				if not bus_scene_initiate then
+					if love.keyboard.isDown("w") or love.keyboard.isDown("up") then
+						self.character.velocity_y = -600
+					end
+				else
+					--nothing will happen here because yeah
 				end
 			else
 				self.character.velocity_x = 0
@@ -108,16 +129,6 @@ scenes.intro = {
 		end
 		
 		for i, goose in ipairs(self.geese) do
-<<<<<<< HEAD
-			if goose.x < 0 then
-        goose.x = snapshot.x + 1000
-        snapshot = {x = self.character.x, y = self.character.y}
-      else
-        goose.x = goose.x - (500*dt);
-      end
-      
-			  goose.y = (-.0005)*(goose.x - snapshot.x)^2 + snapshot.y
-=======
 			if goose.x > self.character.x then goose.x = goose.x - 10 * dt
 			else goose.x = goose.x + 10 * dt end
 			goose.x = goose.x - 150 * dt
@@ -126,7 +137,6 @@ scenes.intro = {
 				goose.x = self.character.x + i * 600
 				goose.y = -200
 			end
->>>>>>> 5af9862605594f42458de9c5379fdab6d7a837b6
 		end
 		
 		--fade in rectangle alpha
@@ -138,10 +148,6 @@ scenes.intro = {
 			self.darkening = 0
 		end
 		
-		if self.character.x > 2400 then --end condition reached
-			set_scene(scenes.bus)
-			return
-		end
 	end,
 	draw = function(self, dt, elapsed)
 		love.graphics.setBackgroundColor(0, 0, 0)
@@ -153,10 +159,16 @@ scenes.intro = {
 		
 		draw_character(self.character, self.camera_x, self.camera_y)
 		for i, goose in ipairs(self.geese) do
-			
 			draw_character(goose, self.camera_x, self.camera_y)
 		end
 		love.graphics.draw(self.rain, 0, 0)
+		
+		--bus draw
+		love.graphics.push()
+		love.graphics.translate(-self.camera_x, -self.camera_y)
+		love.graphics.draw(self.bus, self.bus_x, self.bus_y)
+		love.graphics.pop()
+		
 		draw_map(self.map, self.tiles, self.tile_quads, self.tile_size, self.camera_x, self.camera_y)
 		self.pause_play_button:draw()
 		
