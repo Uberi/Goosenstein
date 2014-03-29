@@ -37,8 +37,8 @@ function love.load()
 	scene_changed = false
 
 	--set_scene(scenes.title) --wip: debug
-	set_scene(scenes.intro)
-	--set_scene(scenes.bus)
+	--set_scene(scenes.intro)
+	set_scene(scenes.bus)
 end
 
 current_scene = {}

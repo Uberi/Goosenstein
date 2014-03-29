@@ -67,9 +67,9 @@ scenes.bus = {
 		local actuated = false
 		local bus_scene_initiate = false; --if true then player can not move, if false then player can move!
 		
-		if self.character.x >= 1700 and self.character.x <= 1725 and self.character.y == 750 then
-			bus_scene_initiate = true
-		end
+		--if self.character.x >= 1700 then
+		--	bus_scene_initiate = true
+		--end
 		
 		if  not bus_scene_initiate then
 			if love.keyboard.isDown("a") or love.keyboard.isDown("left") then
@@ -83,8 +83,8 @@ scenes.bus = {
 				self.character.x = self.character.x + move_speed * dt
 				self.character.flipped = false
 				actuated = true
-				--print("CHARACTER X: ", self.character.x)
-				--print("CHARACTER Y: ", self.character.y)
+				print("CHARACTER X: ", self.character.x)
+				print("CHARACTER Y: ", self.character.y)
 			end
 		else
 			--nothing shall go here!!
