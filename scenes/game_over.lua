@@ -3,19 +3,24 @@ scenes = scenes or {}
 require "utilities/buttons"
 
 scenes.game_over = {
-    initialize = function(self)
-		self.pixel_large = love.graphics.newFont("fonts/Victor Pixel.ttf", 86)
-		self.pixel_medium = love.graphics.newFont("fonts/Victor Pixel.ttf", 56)
-		self.pixel_small = love.graphics.newFont("fonts/Victor Pixel.ttf", 30)
-		love.graphics.setFont(self.pixel_medium)
-	end,
+  initialize = function(self)
+   self.pixel_large = love.graphics.newFont("fonts/Victor Pixel.ttf", 86)
+   self.pixel_medium = love.graphics.newFont("fonts/Victor Pixel.ttf", 56)
+   self.pixel_small = love.graphics.newFont("fonts/Victor Pixel.ttf", 30)
+   self.credit_font = love.graphics.newFont("fonts/Victor Pixel.ttf", 14)
    
-	enter = function(self, old_scene)
-		self.old_scene = old_scene
-		self.restart_button = button:create("restart", 130, 400, 400, 90, self.pixel_large)
-		self.exit_button = button:create("exit", 600, 400, 400, 90, self.pixel_large)
-		self.buttons_enabled = true
-	end,
+   self.restart_button = button:create("restart", 130, 400, 400, 90, self.pixel_large)
+   self.exit_button = button:create("exit", 600, 400, 400, 90, self.pixel_large)
+     
+   self.buttons_enabled = true
+   end,
+   
+   enter = function(self)
+     self.restart_button = button:create("restart", 130, 400, 400, 90, self.pixel_large)
+     self.exit_button = button:create("exit", 600, 400, 400, 90, self.pixel_large)
+     
+     self.buttons_enabled = true
+   end,
    
    mousereleased = function(self, x, y, button)
     self.restart_button:mousereleased(x, y, button)
@@ -28,13 +33,13 @@ scenes.game_over = {
       self.exit_button:update(dt)
       if self.restart_button.was_clicked then
         self.buttons_enabled = false
-        set_scene(self.old_scene)
+        set_scene(scenes.intro)
         return
       end
       
       if self.exit_button.was_clicked then
         self.buttons_enabled = false
-        set_scene(scenes.title)
+        set_scene(scenes.intro)
         return
       end
     end
@@ -51,8 +56,17 @@ scenes.game_over = {
   draw = function(self, dt, elapsed)
     love.graphics.setBackgroundColor(0, 0, 0)
     love.graphics.setColor(255, 255, 255)
-    
-    love.graphics.printf("The geese overran you. You have perished.", 50, 100, 500, "center")
+    love.graphics.setFont(self.pixel_medium)
+    love.graphics.printf("The geese overran you. You have perished.", 100, 100, 500, "center")
+    love.graphics.setFont(self.credit_font)
+    love.graphics.printf("Credits\n\n Anthony Zhang\t- Über-rad Lead Developer\n \
+                          Nerman Nicholas\t- Level Design/Developer\n \
+                          Matas Empakeris\t- Developer\n\
+                          Ankit Whateverurlastnameis\t- #GraphicDesigner\n\
+                          Elvin Yung - Master Race Troll\n\n \
+                          Special Thanks to Dan Wolczuk for narration"
+                          , 450, 100, 700, "center")
+                          
     
     self.restart_button:draw()
     self.exit_button:draw()
