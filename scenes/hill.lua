@@ -3,12 +3,12 @@ scenes = scenes or {}
 require "utilities/bloom"
 require "utilities/buttons"
 local HC = require "hardoncollider"
-local tilemap = require "levels/level1_part2"
+local tilemap = require "levels/level3_part3"
 require "levels"
 
 local total_elapsed
 
-scenes.part = {
+scenes.hill = {
 	initialize = function(self)
 		self.bloom_effect = bloom:create()
 		self.bloom_effect.radius = 4
@@ -27,7 +27,7 @@ scenes.part = {
 		self.camera_x, self.camera_y = 0, 0
 		
 		self.collider = HC(100)
-		self.character = init_character(self.collider, 151, 250)
+		self.character = init_character(self.collider, 201, 250)
 		
 		self.goose_collider = HC(100, function(dt, shape_s, shape_t, dx, dy)
 			if total_elapsed > 2 then --small period of invulnerability
@@ -129,8 +129,8 @@ scenes.part = {
 		self.goose_collider:update(dt)
 		for i, goose in ipairs(self.geese) do
 			goose.x = goose.x - 300 * dt
-			if goose.x < self.character.x - 1500 then
-				goose.x = self.character.x + 2500
+			if goose.x < self.character.x - 2500 then
+				goose.x = self.character.x + 1500
 				goose.target_x, goose.target_y = self.character.x, self.character.y
 			end
 			goose.y = -0.001 * (goose.x - goose.target_x)^2 + goose.target_y
@@ -145,8 +145,8 @@ scenes.part = {
 			self.darkening = 0
 		end
 		
-		if self.character.x > 9800 then --end condition reached
-			set_scene(scenes.big)
+		if self.character.x > 5100 then --end condition reached
+			set_scene(scenes.title)
 			return
 		end
 		if self.character.y > 6000 then
