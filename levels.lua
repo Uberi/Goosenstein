@@ -16,9 +16,9 @@ function init_rain()
 		return rain
 end
 
-function init_character(collider)
+function init_character(collider, x, y)
 	local character = {
-		x = 500, y = 0,
+		x = x, y = y,
 		w = 80, h = 100,
 		image = love.graphics.newImage("images/Character.png"),
 		scale = 0.4,
@@ -36,6 +36,33 @@ function init_character(collider)
 		if shape_s == character.shape or shape_t == character.shape then --keep it out of collision
 			character.mtv_x, character.mtv_y = dx, dy
 		end
+		if shape_s == character.shape or shape_t == character.shape then --keep it out of collision
+			character.mtv_x, character.mtv_y = dx, dy
+		end
+	end)
+	return character
+end
+
+function init_goose(collider, x, y, image)
+	local character = {
+		x = x, y = y,
+		image = love.graphics.newImage(image),
+		scale = 0.6,
+		velocity_x = 0, velocity_y = 0,
+		mtv_x = nil, mtv_y = nil,
+		flipped = false,
+	}
+	character.w, character.h = character.image:getWidth() * character.scale, character.image:getHeight() * character.scale
+	character.shape = collider:addRectangle(character.x, character.y, character.w, character.h)
+	character.state = love.graphics.newQuad(0, 0, character.image:getWidth(), character.image:getHeight(), character.image:getWidth(), character.image:getHeight())
+	
+	local original = collider.on_collide
+	collider:setCallbacks(function(dt, shape_s, shape_t, dx, dy)
+		if shape_s == character.shape or shape_t == character.shape then --keep it out of collision
+			character.mtv_x, character.mtv_y = dx, dy
+		else
+			return original(dt, shape_s, shape_t, dx, dy)
+		end
 	end)
 	return character
 end
@@ -52,7 +79,7 @@ function init_map(map, collider, tile_size)
 	end
 	local tiles = love.graphics.newImage("images/Tiles.png")
 	local tile_quads = {}
-	for i = 1, 6 do
+	for i = 1, 8 do
 		local rect = love.graphics.newQuad(0, (i - 1) * 128, 128, 128, tiles:getWidth(), tiles:getHeight())
 		table.insert(tile_quads, rect)
 	end
@@ -82,5 +109,14 @@ function draw_character(character, camera_x, camera_y)
 	else
 		love.graphics.draw(character.image, character.state, character.x, character.y + 7, 0, character.scale)
 	end
+	love.graphics.pop()
+end
+
+function draw_background(background, camera_x, camera_y)
+	love.graphics.push()
+	love.graphics.translate((-camera_x * 0.5) % background:getWidth(), 0)
+	love.graphics.draw(background, -background:getWidth(), 0, 0, height / background:getHeight())
+	love.graphics.draw(background, 0, 0, 0, height / background:getHeight())
+	love.graphics.draw(background, background:getWidth(), 0, 0, height / background:getHeight())
 	love.graphics.pop()
 end
