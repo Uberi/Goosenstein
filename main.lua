@@ -5,6 +5,7 @@ scenes = {}
 
 require "scenes/title"
 require "scenes/intro"
+require "scenes/bus"
 
 --give local aliases for globals to improve performance
 local love, math = love, math
@@ -34,7 +35,8 @@ function love.load()
 	end
 
 	--set_scene(scenes.title) --wip: debug
-	set_scene(scenes.intro)
+	--set_scene(scenes.intro)
+	set_scene(scenes.bus)
 end
 
 current_scene = {}

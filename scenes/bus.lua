@@ -3,10 +3,10 @@ scenes = scenes or {}
 require "utilities/bloom"
 require "utilities/buttons"
 local HC = require "hardoncollider"
-local tilemap = require "levels/level1_part2"
+local tilemap = require "levels/level1_part1"
 require "levels"
 
-scenes.intro = {
+scenes.bus = {
 	initialize = function(self)
 		self.bloom_effect = bloom:create()
 		self.bloom_effect.radius = 4
