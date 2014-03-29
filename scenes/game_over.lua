@@ -39,7 +39,7 @@ scenes.game_over = {
       
       if self.exit_button.was_clicked then
         self.buttons_enabled = false
-        set_scene(scenes.intro)
+        set_scene(scenes.title)
         return
       end
     end
@@ -59,9 +59,9 @@ scenes.game_over = {
     love.graphics.setFont(self.pixel_medium)
     love.graphics.printf("The geese overran you. You have perished.", 100, 100, 500, "center")
     love.graphics.setFont(self.credit_font)
-    love.graphics.printf("Credits\n\n Anthony Zhang\t- Über-rad Lead Developer\n \
+    love.graphics.printf("Credits\n\n Anthony Zhang\t- Lead Developer\n \
                           Nerman Nicholas\t- Level Design/Developer\n \
-                          Matas Empakeris\t- Developer\n\
+                          Matas Empakeris\t- Developer/Research/Level Design\n\
                           Ankit Whateverurlastnameis\t- #GraphicDesigner\n\
                           Elvin Yung - Master Race Troll\n\n \
                           Special Thanks to Dan Wolczuk for narration"
