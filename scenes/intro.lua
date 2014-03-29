@@ -6,6 +6,8 @@ local HC = require "hardoncollider"
 local tilemap = require "levels/level1_house"
 require "levels"
 
+local total_elapsed
+
 scenes.intro = {
 	initialize = function(self)
 		self.bloom_effect = bloom:create()
@@ -26,7 +28,19 @@ scenes.intro = {
 		
 		self.collider = HC(100)
 		self.character = init_character(self.collider, 151, 250)
+		
+		self.goose_collider = HC(100, function(dt, shape_s, shape_t, dx, dy)
+			if total_elapsed > 2 then --small period of invulnerability
+				love.event.quit() --wip: game over screen
+			end
+		end)
 		self.geese = {init_goose(self.collider, 700, 0, "images/Goose Flying.png"), init_goose(self.collider, 0, 0, "images/Goose Flapping.png")}
+		for i, goose in ipairs(self.geese) do
+			goose.shape = self.goose_collider:addRectangle(goose.x, goose.y, goose.w, goose.h)
+			self.goose_collider:addToGroup("geese", goose.shape)
+			self.goose_collider:setPassive(goose.shape)
+		end
+		self.goose_shape = self.goose_collider:addRectangle(self.character.x + 20, self.character.y + 20, self.character.w - 40, self.character.h - 40)
 		
 		self.tile_size = 50
 		self.map = {}
@@ -40,6 +54,7 @@ scenes.intro = {
 		self.pause_play_button:mousereleased(x, y, button)
 	end,
 	update = function(self, dt, elapsed)
+		total_elapsed = elapsed
 		self.rain:update(dt)
 		
 		self.pause_play_button:update(dt)
@@ -105,6 +120,12 @@ scenes.intro = {
 			end
 		end
 		
+		self.goose_shape:moveTo(self.character.x + self.character.w / 2, self.character.y + self.character.h / 2)
+		for i, goose in ipairs(self.geese) do
+			goose.shape:moveTo(goose.x + goose.w / 2, goose.y + goose.h / 2)
+		end
+		
+		self.goose_collider:update(dt)
 		for i, goose in ipairs(self.geese) do
 			goose.x = goose.x - 300 * dt
 			if goose.x < self.character.x - 1500 then
