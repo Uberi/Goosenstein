@@ -51,7 +51,7 @@ scenes.bus = {
 				self.pause_play_button.text = ">"
 			end
 		end
-		
+
 		--update tracking camera
 		local movement = 1.5 * dt
 		self.camera_x = self.camera_x * (1 - movement) + (self.character.x - width / 2) * movement
@@ -124,6 +124,7 @@ scenes.bus = {
 		else
 			self.darkening = 0
 		end
+		
 	end,
 	draw = function(self, dt, elapsed)
 		love.graphics.setBackgroundColor(0, 0, 0)
@@ -135,7 +136,6 @@ scenes.bus = {
 		
 		draw_character(self.character, self.camera_x, self.camera_y)
 		for i, goose in ipairs(self.geese) do
-			
 			draw_character(goose, self.camera_x, self.camera_y)
 		end
 		love.graphics.draw(self.rain, 0, 0)

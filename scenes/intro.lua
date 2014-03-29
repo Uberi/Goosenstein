@@ -124,6 +124,11 @@ scenes.intro = {
 		else
 			self.darkening = 0
 		end
+		
+		if self.character.x > 9900 then --end condition reached
+			set_scene(scenes.bus)
+			return
+		end
 	end,
 	draw = function(self, dt, elapsed)
 		love.graphics.setBackgroundColor(0, 0, 0)

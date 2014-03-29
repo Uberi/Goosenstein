@@ -34,9 +34,11 @@ function love.load()
 		scene:initialize()
 	end
 
+	scene_changed = false
+
 	--set_scene(scenes.title) --wip: debug
-	--set_scene(scenes.intro)
-	set_scene(scenes.bus)
+	set_scene(scenes.intro)
+	--set_scene(scenes.bus)
 end
 
 current_scene = {}
@@ -52,6 +54,7 @@ function set_scene(scene)
 		scene:enter()
 	end
 	current_start_time = love.timer.getTime()
+	scene_changed = true
 end
 
 function love.mousereleased(x, y, button)
@@ -69,6 +72,10 @@ function love.update(dt)
 end
 
 function love.draw()
+	if scene_changed then
+		scene_changed = false
+		return
+	end
 	local elapsed = love.timer.getTime() - current_start_time
 	return current_scene:draw(love.timer.getDelta(), elapsed)
 end
