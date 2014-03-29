@@ -3,12 +3,12 @@ scenes = scenes or {}
 require "utilities/bloom"
 require "utilities/buttons"
 local HC = require "hardoncollider"
-local tilemap = require "levels/level1_part2"
+local tilemap = require "levels/level3_part1"
 require "levels"
 
 local total_elapsed
 
-scenes.part = {
+scenes.big = {
 	initialize = function(self)
 		self.bloom_effect = bloom:create()
 		self.bloom_effect.radius = 4
@@ -129,8 +129,8 @@ scenes.part = {
 		self.goose_collider:update(dt)
 		for i, goose in ipairs(self.geese) do
 			goose.x = goose.x - 300 * dt
-			if goose.x < self.character.x - 1500 then
-				goose.x = self.character.x + 2500
+			if goose.x < self.character.x - 2500 then
+				goose.x = self.character.x + 1500
 				goose.target_x, goose.target_y = self.character.x, self.character.y
 			end
 			goose.y = -0.001 * (goose.x - goose.target_x)^2 + goose.target_y
@@ -145,7 +145,7 @@ scenes.part = {
 			self.darkening = 0
 		end
 		
-		if self.character.x > 9800 then --end condition reached
+		if self.character.x > 5700 then --end condition reached
 			set_scene(scenes.bus)
 			return
 		end
