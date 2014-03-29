@@ -5,6 +5,7 @@ require "utilities/buttons"
 local HC = require "hardoncollider"
 local tilemap = require "levels/level1_part2"
 require "levels"
+local snapshot
 
 scenes.intro = {
 	initialize = function(self)
@@ -27,6 +28,7 @@ scenes.intro = {
 		self.collider = HC(100)
 		self.character = init_character(self.collider, 500, 250)
 		self.geese = {init_goose(self.collider, 700, 0, "images/Goose Flying.png"), init_goose(self.collider, 0, 0, "images/Goose Flapping.png")}
+    snapshot = {x = self.character.x, y = self.character.y}
 		
 		self.tile_size = 50
 		self.map = {}
@@ -106,8 +108,14 @@ scenes.intro = {
 		end
 		
 		for i, goose in ipairs(self.geese) do
-			goose.x = goose.x * (1 - dt) + self.character.x * dt
-			goose.y = goose.y + 200 * dt
+			if goose.x < 0 then
+        goose.x = snapshot.x + 1000
+        snapshot = {x = self.character.x, y = self.character.y}
+      else
+        goose.x = goose.x - (500*dt);
+      end
+      
+			  goose.y = (-.0005)*(goose.x - snapshot.x)^2 + snapshot.y
 		end
 		
 		--fade in rectangle alpha
