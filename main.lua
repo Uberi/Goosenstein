@@ -59,6 +59,7 @@ function love.mousereleased(x, y, button)
 end
 
 function love.update(dt)
+	if dt > 0.05 then dt = 0.05 end --delta limit to avoid lag issues
 	if current_scene.update then
 		local elapsed = love.timer.getTime() - current_start_time
 		return current_scene:update(dt, elapsed)
