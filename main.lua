@@ -7,6 +7,7 @@ require "utilities/bloom"
 require "utilities/buttons"
 
 require "scenes/title"
+require "scenes/intro"
 
 --give local aliases for globals to improve performance
 local love, math = love, math
@@ -35,7 +36,8 @@ function love.load()
 		scene:initialize()
 	end
 
-	set_scene(scenes.title)
+	set_scene(scenes.title) --wip: debug
+	--set_scene(scenes.intro)
 end
 
 current_scene = {}

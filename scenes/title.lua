@@ -2,8 +2,6 @@ scenes = scenes or {}
 
 scenes.title = {
 	initialize = function(self)
-		self.bloom_effect = bloom:create()
-
 		self.pixel_large = love.graphics.newFont("fonts/Victor Pixel.ttf", 86)
 		self.pixel_medium = love.graphics.newFont("fonts/Victor Pixel.ttf", 56)
 		self.pixel_small = love.graphics.newFont("fonts/Victor Pixel.ttf", 30)
@@ -27,14 +25,20 @@ scenes.title = {
 			self.resume_button:update(dt)
 			if self.resume_button.was_clicked then
 				self.buttons_enabled = false
+				set_scene(scenes.intro)
 				return
 			end
 			self.start_button:update(dt)
 			if self.start_button.was_clicked then
 				self.buttons_enabled = false
+				set_scene(scenes.intro)
 				return
 			end
 			self.levels_button:update(dt)
+			if self.levels_button.was_clicked then
+				self.buttons_enabled = false
+				return
+			end
 			self.exit_button:update(dt)
 			if self.exit_button.was_clicked then
 				love.event.quit()
