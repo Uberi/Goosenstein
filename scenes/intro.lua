@@ -5,7 +5,6 @@ require "utilities/buttons"
 local HC = require "hardoncollider"
 local tilemap = require "levels/level1_house"
 require "levels"
-local snapshot
 
 scenes.intro = {
 	initialize = function(self)
@@ -28,7 +27,6 @@ scenes.intro = {
 		self.collider = HC(100)
 		self.character = init_character(self.collider, 151, 250)
 		self.geese = {init_goose(self.collider, 700, 0, "images/Goose Flying.png"), init_goose(self.collider, 0, 0, "images/Goose Flapping.png")}
-    snapshot = {x = self.character.x, y = self.character.y}
 		
 		self.tile_size = 50
 		self.map = {}
@@ -108,25 +106,12 @@ scenes.intro = {
 		end
 		
 		for i, goose in ipairs(self.geese) do
-<<<<<<< HEAD
-			if goose.x < 0 then
-        goose.x = snapshot.x + 1000
-        snapshot = {x = self.character.x, y = self.character.y}
-      else
-        goose.x = goose.x - (500*dt);
-      end
-      
-			  goose.y = (-.0005)*(goose.x - snapshot.x)^2 + snapshot.y
-=======
-			if goose.x > self.character.x then goose.x = goose.x - 10 * dt
-			else goose.x = goose.x + 10 * dt end
-			goose.x = goose.x - 150 * dt
-			goose.y = goose.y + 200 * dt
-			if goose.y > 1000 then
-				goose.x = self.character.x + i * 600
-				goose.y = -200
+			goose.x = goose.x - 300 * dt
+			if goose.x < self.character.x - 1500 then
+				goose.x = self.character.x + 1500
+				goose.target_x, goose.target_y = self.character.x, self.character.y
 			end
->>>>>>> 5af9862605594f42458de9c5379fdab6d7a837b6
+			goose.y = -0.001 * (goose.x - goose.target_x)^2 + goose.target_y
 		end
 		
 		--fade in rectangle alpha

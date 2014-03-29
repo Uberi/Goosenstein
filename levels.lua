@@ -51,6 +51,7 @@ function init_goose(collider, x, y, image)
 		velocity_x = 0, velocity_y = 0,
 		mtv_x = nil, mtv_y = nil,
 		flipped = false,
+		target_x = 500, target_y = 500,
 	}
 	character.w, character.h = character.image:getWidth() * character.scale, character.image:getHeight() * character.scale
 	character.shape = collider:addRectangle(character.x, character.y, character.w, character.h)

@@ -18,7 +18,7 @@ scenes.bus = {
 		self.goose_flapping = love.graphics.newImage("images/Goose Flapping.png")
 		self.goosoraptor = love.graphics.newImage("images/Goosoraptor.png")
 		self.bus = love.graphics.newImage("images/Bus.png")
-		self.bus_x, self.bus_y = 1750, 690
+		self.bus_x, self.bus_y = 1750, 660
 		
 		self.pause_play_button = button:create("ii", 10, 10, 40, 40, self.pixel_small)
 		
@@ -27,7 +27,7 @@ scenes.bus = {
 		self.camera_x, self.camera_y = 0, 0
 		
 		self.collider = HC(100)
-		self.character = init_character(self.collider, 500, 250)
+		self.character = init_character(self.collider, 501, 250)
 		self.geese = {init_goose(self.collider, 700, 0, "images/Goose Flying.png"), init_goose(self.collider, 0, 0, "images/Goose Flapping.png")}
 		
 		self.tile_size = 50
@@ -66,7 +66,7 @@ scenes.bus = {
 		
 		local move_speed = 300
 		local actuated = false
-		local bus_scene_initiate = false;
+		local bus_scene_initiate = false
 		
 		if self.character.x >= 1700 then
 			bus_scene_initiate = true
@@ -77,20 +77,20 @@ scenes.bus = {
 				self.character.x = self.character.x - move_speed * dt
 				self.character.flipped = true
 				actuated = true
-				--print("CHARACTER X: ", self.character.x)
-				--print("CHARACTER Y: ", self.character.y)
 			end
 			if love.keyboard.isDown("d") or love.keyboard.isDown("right") then
 				self.character.x = self.character.x + move_speed * dt
 				self.character.flipped = false
 				actuated = true
-				--print("CHARACTER X: ", self.character.x)
-				--print("CHARACTER Y: ", self.character.y)
 			end
 		else
 			self.camera_x = self.camera_x * (1 - movement) + (self.bus_x - width / 2) * movement
 			self.camera_y = self.camera_y * (1 - movement) + (self.bus_y - height / 2) * movement
-			self.bus_x = self.bus_x + 300*dt
+			self.bus_x = self.bus_x + 300 * dt
+			if self.bus_x > 2600 then
+				love.event.quit()
+				return
+			end
 		end
 		
 		if actuated then
@@ -129,14 +129,12 @@ scenes.bus = {
 		end
 		
 		for i, goose in ipairs(self.geese) do
-			if goose.x > self.character.x then goose.x = goose.x - 10 * dt
-			else goose.x = goose.x + 10 * dt end
-			goose.x = goose.x - 150 * dt
-			goose.y = goose.y + 200 * dt
-			if goose.y > 1000 then
-				goose.x = self.character.x + i * 600
-				goose.y = -200
+			goose.x = goose.x - 300 * dt
+			if goose.x < self.character.x - 1500 and not bus_scene_initiate then
+				goose.x = self.character.x + 1500
+				goose.target_x, goose.target_y = self.character.x, self.character.y
 			end
+			goose.y = -0.001 * (goose.x - goose.target_x)^2 + goose.target_y
 		end
 		
 		--fade in rectangle alpha
