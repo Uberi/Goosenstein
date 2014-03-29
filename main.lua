@@ -8,6 +8,8 @@ require "scenes/intro"
 require "scenes/bus"
 require "scenes/part"
 require "scenes/big"
+require "scenes/tunnel"
+require "scenes/hill"
 
 --give local aliases for globals to improve performance
 local love, math = love, math
@@ -42,7 +44,9 @@ function love.load()
 	--set_scene(scenes.intro)
 	--set_scene(scenes.bus)
 	--set_scene(scenes.part)
-	set_scene(scenes.big)
+	--set_scene(scenes.big)
+	--set_scene(scenes.tunnel)
+	set_scene(scenes.hill)
 end
 
 current_scene = {}

@@ -146,7 +146,7 @@ scenes.big = {
 		end
 		
 		if self.character.x > 5700 then --end condition reached
-			set_scene(scenes.bus)
+			set_scene(scenes.tunnel)
 			return
 		end
 		if self.character.y > 6000 then
