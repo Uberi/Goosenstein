@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="100" height="20" tilewidth="128" tileheight="128">
+ <tileset firstgid="1" name="Tiles" tilewidth="128" tileheight="128">
+  <image source="../images/Tiles.png" trans="4b4b4b" width="128" height="1024"/>
+ </tileset>
+ <tileset firstgid="9" name="Tiles" tilewidth="128" tileheight="128">
+  <image source="../images/Tiles.png" trans="4b4b4b" width="128" height="1024"/>
+ </tileset>
+ <layer name="Tile Layer 1" width="100" height="20">
+  <data encoding="base64" compression="zlib">
+   eJztl9EOwjAIRbtHNYv+/9fqVBIkXApt13WxN+GlA2GcldaUps6qx8vuRxcx9dbG4vK1yeRYcRaTybHSWEwmv9p6dFOMpK2V5kEsJpOPeI8WYVzk04LLmZmgb7dFzcSC+i/7wiWf/RMTzkDrE/Wwhs0jYQ6SRQI+HiZbnhXUODITziBXp+SCakezJTfHkRATdL7IPKMzKWWATPZG663nTLXkjUV5ZH8979WDCc2LFhzkftHOY8pZwyI543OzcBQmrfdDpK8eFjIOzTsrnrPQzOpvDyYRBl71YkHrkol3f/Zigu6gmtV800h7sJCxud9twaMFk8j7oXr34iEVrdXK4a0hwsJiksvTa+5bbPbaFzJee0/vzIruDw+TkVTyP7hkD3PV+Hh4LMD/LEwiKp2nUqU+NTxGZ3IN+tecbRF5e+5hoq3z+9Ca8F3Jemb5eNfk+jWYr1WfauwJ7hMb0A==
+  </data>
+ </layer>
+</map>
