@@ -1,7 +1,7 @@
 Goosenstein 1.0
 ===============
 
-Goosenstein is a lovely 2D sidescroller, written for HackWATERLOO 2014.
+[Goosenstein](https://github.com/Uberi/Goosenstein#readme) is a lovely 2D sidescroller, written for HackWATERLOO 2014.
 
 ![Screenshot](Screenshot.png)
 
@@ -17,6 +17,26 @@ The Canadian goose is a haunting and intriguing creature.
 Known to reach wingspans of over 50 meters, and in multiple confirmed sightings, to breathe fire, the "common goose" is a near-mythical creature the abilities of which are almost completely unknown.
 
 Goosenstein pits a harried uWaterloo stundent against an unstoppable force of nature - the majestic, terrifying _Goose_.
+
+Running It
+----------
+
+Goosenstein requires a computer with modern video hardware, supporting a relatively recent version of GLSL.
+
+### Windows
+
+1. Download `Goosenstein Windows 32-bit.zip` from the [RELEASES PAGE](https://github.com/Uberi/Goosenstein/releases).
+2. Extract the archive somewhere safe.
+3. In the `Goosenstein` folder, run `Goosenstein.exe`.
+4. Play!
+
+### Linux/Mac
+
+1. Download and install LOVE2d from the [official website](http://love2d.org/).
+2. Download `Goosenstein LOVE.zip` from the [RELEASES PAGE](https://github.com/Uberi/Goosenstein/releases).
+3. Extract the archive somewhere safe.
+4. In the `Goosenstein` folder, run `Goosenstein.love` using LOVE2d.
+5. Play!
 
 Credits
 -------
