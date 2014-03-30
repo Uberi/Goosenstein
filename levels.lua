@@ -1,5 +1,5 @@
 function init_rain()
-	local rain = love.graphics.newParticleSystem(love.graphics.newImage("images/rain.png"), 2000)
+	local rain = love.graphics.newParticleSystem(love.graphics.newImage("images/Rain.png"), 2000)
 		rain:setEmissionRate(80) --emitted particles per second
 		rain:setEmitterLifetime(-1) --continuously emit particles
 		rain:setParticleLifetime(16, 20) --each particle lives for 5 seconds
