@@ -9,6 +9,8 @@ Geese! Blocks! Unintentional features!
 
 Novel yet beautiful, bizarre yet familiar, Goosenstein is a new way of appreciating our evil feathered friends.
 
+# [DOWNLOAD THIS AWESOME GAME](https://github.com/Uberi/Goosenstein/releases)
+
 Description
 -----------
 
