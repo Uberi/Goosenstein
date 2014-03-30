@@ -1,5 +1,5 @@
-Goosenstein
-===========
+Goosenstein 1.0
+===============
 
 Goosenstein is a lovely 2D sidescroller, written for HackWATERLOO 2014.
 
