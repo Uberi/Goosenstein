@@ -1,24 +1,17 @@
 Goosenstein 1.0
 ===============
 
-[Goosenstein](https://github.com/Uberi/Goosenstein#readme) is a lovely 2D sidescroller, written for HackWATERLOO 2014.
+[Goosenstein](https://github.com/Uberi/Goosenstein#readme) is an action-packed 2D sidescroller, written for HackWATERLOO 2014 with Lua and LOVE2d.
 
 ![Screenshot](Screenshot.png)
-
-Geese! Blocks! Unintentional features!
-
-Novel yet beautiful, bizarre yet familiar, Goosenstein is a new way of appreciating our evil feathered friends.
-
-# [DOWNLOAD THIS AWESOME GAME](https://github.com/Uberi/Goosenstein/releases)
-
-Description
------------
 
 The Canadian goose is a haunting and intriguing creature.
 
 Known to reach wingspans of over 50 meters, and in multiple confirmed sightings, to breathe fire, the "common goose" is a near-mythical creature the abilities of which are almost completely unknown.
 
 Goosenstein pits a harried uWaterloo stundent against an unstoppable force of nature - the majestic, terrifying _Goose_.
+
+# [DOWNLOAD THIS AWESOME GAME](https://github.com/Uberi/Goosenstein/releases)
 
 Running It
 ----------
